@@ -1,0 +1,14 @@
+{
+    "name": "whisper-ui",
+    "version": "1.0.0",
+    "main": "./electron/main.js",
+    "scripts": {
+        "start": "electron ."
+    },
+    "devDependencies": {
+        "electron": "^23.3.0"
+    },
+    "dependencies": {
+        "python-shell": "^5.0.0"
+    }
+}
