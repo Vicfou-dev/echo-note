@@ -13,7 +13,8 @@ def main(args):
     url = data['url']
     name = data['name']
 
-    model = WhisperModel(name, device="cpu", compute_type="int8", download_root="models")
+    model = WhisperModel('tiny', device="cpu", compute_type="int8", download_root="models")
+
     segments, info = model.transcribe(url, beam_size=5)
 
     json_result = process_segments(segments, info)
