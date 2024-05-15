@@ -1,71 +1,71 @@
 const path = require('path');
 const { PythonShell } = require('python-shell');
+
 document.addEventListener("DOMContentLoaded", () => {
-    var startButton = document.getElementById('start_button');
-    startButton.disabled = true;
+	var startButton = document.getElementById('start_button');
+	startButton.disabled = true;
 
-    document.getElementById('upload_file').addEventListener('change', function() {
-        var fileInfo = document.getElementById('file_info');
-        if (this.files.length > 0) {
-          fileInfo.textContent = 'Selected file : ' + this.files[0].name;
-        } else {
-          fileInfo.textContent = 'No file selected';
-        }
-        startButton.disabled = this.files.length === 0;
-        fileInfo.classList.remove('hidden');
-    });
+	document.getElementById('upload_file').addEventListener('change', function () {
+		var fileInfo = document.getElementById('file_info');
+		if (this.files.length > 0) {
+			fileInfo.textContent = 'Selected file : ' + this.files[0].name;
+		} else {
+			fileInfo.textContent = 'No file selected';
+		}
+		startButton.disabled = this.files.length === 0;
+		fileInfo.classList.remove('hidden');
+	});
 
-    var copyButton = document.getElementById('copy_button');
-    var transcription = document.getElementById('transcription');
+	var copyButton = document.getElementById('copy_button');
+	var transcription = document.getElementById('transcription');
 
-    var alert = document.getElementById('alert');
-    copyButton.addEventListener('click', function() {
-      // Sélectionne le texte de la zone de texte
-      transcription.select();
-      transcription.setSelectionRange(0, 99999); // Pour les appareils mobiles
+	var alert = document.getElementById('alert');
+	copyButton.addEventListener('click', function () {
 
-      // Copie le texte dans le presse-papiers
-      document.execCommand('copy');
+		transcription.select();
+		transcription.setSelectionRange(0, 99999); 
 
-      // Désélectionne le texte
-      transcription.blur();
 
-      alert.classList.add('show');
+		document.execCommand('copy');
 
-      setTimeout(function() {
-        alert.classList.remove('show');
-      }, 3000);
-    });
+		transcription.blur();
 
-    document.getElementById('start_button').addEventListener('click', function() {
-        this.classList.add('loading');
-        const url = document.getElementById('upload_file').files[0].path;
-        const name = document.getElementById('model').value
-        const jsonArg = JSON.stringify({ url: url, name: name })
+		alert.classList.add('show');
 
-        let options = {
-            mode: 'text',
-            pythonOptions: ['-u'], // get print results in real-time
-            scriptPath: path.join(__dirname, '..', 'python'),
-            args: [jsonArg]
-        };
+		setTimeout(function () {
+			alert.classList.remove('show');
+		}, 3000);
+	});
 
-        const success = (messages) => {
-            const message = messages[0];
-            message.replace(/\\/g, '');
-            const text = JSON.parse(message).text;
-            document.getElementById('transcription').innerHTML = text.trim();
-        }
+	document.getElementById('start_button').addEventListener('click', function () {
+		this.classList.add('loading');
+		const url = document.getElementById('upload_file').files[0].path;
+		const name = document.getElementById('model').value
+		const jsonArg = JSON.stringify({ url: url, name: name })
 
-        const error = (error) => {
-            console.log(error);
-            document.getElementById('transcription').innerHTML = 'An error occurred';
-        }
+		let options = {
+			mode: 'text',
+			pythonOptions: ['-u'], 
+			scriptPath: path.join(__dirname, '..', 'python'),
+			args: [jsonArg]
+		};
 
-        const end = () => {
-            this.classList.remove('loading');
-        }
+		const success = (messages) => {
+			const message = messages[0];
+			message.replace(/\\/g, '');
+			const text = JSON.parse(message).text;
+			document.getElementById('transcription').innerHTML = text.trim();
+		}
 
-        PythonShell.run('whisper.py', options).then(success).catch(error).finally(end);
-    })
+		const error = (error) => {
+			console.log(error);
+			document.getElementById('transcription').innerHTML = 'An error occurred';
+		}
+
+		const end = () => {
+			this.classList.remove('loading');
+		}
+
+		PythonShell.run('whisper.py', options).then(success).catch(error).finally(end);
+	})
 });

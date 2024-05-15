@@ -1,53 +1,53 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <!-- Meta information -->
-    <meta charset="UTF-8" />
-    <meta
-      http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self';"
-    />
 
-    <!-- Page title -->
-    <title>Echo Note</title>
+<head>
+	<!-- Meta information -->
+	<meta charset="UTF-8" />
+	<meta http-equiv="Content-Security-Policy"
+		content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self';" />
 
-    <!-- Stylesheet link -->
-    <link rel="stylesheet" href="index.css" />
-  </head>
+	<!-- Page title -->
+	<title>Echo Note</title>
 
-  <body>
-    <div class="container">
+	<!-- Stylesheet link -->
+	<link rel="stylesheet" href="index.css" />
+</head>
 
-      <p>1. Click on "Upload your mp3 media" to select an mp3 file.</p>
-      <!-- File upload input -->
-      <div class="upload-container">
-        <label for="upload_file" class="upload-label">Upload your mp3 media</label>
-        <input id="upload_file" type="file" accept=".mp3">
-        <p id="file_info">No file selected</p>
-      </div>
+<body>
+	<div class="container">
 
-      <p>2. Select your type's of transcription from the dropdown menu.</p>
-      <!-- Model selection dropdown -->
-      <div class="select-container">
-        <select id="model">
-          <option value="tiny">Very fast with a low accuracy</option>
-          <option value="base">Fast with a good accuracy</option>
-          <option value="large">Slow with a big accuracy</option>
-          <option value="extra_large">Very slow with the best accuracy</option>
-        </select>
-      </div>
+		<p>1. Click on "Upload your mp3 media" to select an mp3 file.</p>
+		<!-- File upload input -->
+		<div class="upload-container">
+			<label for="upload_file" class="upload-label">Upload your mp3 media</label>
+			<input id="upload_file" type="file" accept=".mp3">
+			<p id="file_info">No file selected</p>
+		</div>
 
-      <p>3. Generate your note.</p>
-      <!-- Start transcription button -->
-      <button id="start_button">Start Generating your note</button>
+		<p>2. Select your type's of transcription from the dropdown menu.</p>
+		<!-- Model selection dropdown -->
+		<div class="select-container">
+			<select id="model">
+				<option value="tiny">Very fast with a low accuracy</option>
+				<option value="base">Fast with a good accuracy</option>
+				<option value="large">Slow with a big accuracy</option>
+				<option value="extra_large">Very slow with the best accuracy</option>
+			</select>
+		</div>
 
-      <!-- Transcription display area -->
-      <div class="textarea-container">
-        <textarea id="transcription"></textarea>
-        <button id="copy_button" class="copy-button">📋</button>
-      </div>
-      
-      <div id="alert" class="alert">Text copied to clipboard!</div>
-    </div>
-  </body>
+		<p>3. Generate your note.</p>
+		<!-- Start transcription button -->
+		<button id="start_button">Start Generating your note</button>
+
+		<!-- Transcription display area -->
+		<div class="textarea-container">
+			<textarea id="transcription"></textarea>
+			<button id="copy_button" class="copy-button">📋</button>
+		</div>
+
+		<div id="alert" class="alert">Text copied to clipboard!</div>
+	</div>
+</body>
+
 </html>
