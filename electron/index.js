@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let options = {
             mode: 'text',
             pythonOptions: ['-u'], // get print results in real-time
-            scriptPath: path.join(__dirname,'../python'),
+            scriptPath: path.join(__dirname, '..', 'python'),
             args: [jsonArg]
         };
 
@@ -59,6 +59,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const error = (error) => {
             console.log(error);
+            document.getElementById('transcription').innerHTML = 'An error occurred';
         }
 
         const end = () => {

@@ -8,10 +8,11 @@ function createWindow() {
     width: 800,
     height: 800,
     resizable: false,
+    icon: path.join(__dirname, 'app.png'),
     webPreferences: {
       preload: path.join(__dirname, "index.js"),
       contextIsolation: true,
-      nodeIntegration: true,
+      nodeIntegration: true
     },
   });
 
