@@ -1,5 +1,10 @@
 # whisper-ui
 
+## Install Npm Dependencies
+```
+npm install
+```
+
 ## Install Python Dependencies
 ```
 pip install faster-whisper
